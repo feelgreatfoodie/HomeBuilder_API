@@ -2,8 +2,8 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('orders', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
     table.increments()
-    table.string('ordered_by', 255).notNullable().references('id').inTable('users')
-    table.string('reviewed_by', 255).references('id').inTable('users').defaultTo('')
+    table.string('ordered_by', 255).references('users.id').onDelete('CASCADE')
+    table.string('reviewed_by', 255)references('users.id').onDelete('CASCADE')
     table.boolean('approved').defaultTo(false)
     table.dateTime('created_at').notNullable().defaultTo(knex.raw('now()'))
     table.dateTime('updated_at').notNullable().defaultTo('')

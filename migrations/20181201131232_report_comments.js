@@ -2,13 +2,8 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('report_comments', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
     table.increments()
-    table.string('colname1', 255).notNullable().defaultTo('')
-    table.string('colname2', 255).notNullable().defaultTo('')
-    table.string('colname3', 255).notNullable().defaultTo('')
-    table.timestamps(true, true)
-    // OR
-    // table.dateTime('created_at').notNullable().defaultTo(knex.raw('now()'))
-    // table.dateTime('updated_at').notNullable().defaultTo(knex.raw('now()'))
+    table.string('report', 64).references('reports.id').onDelete('CASCADE')
+    table.string('comment', 64).references('comments.id').onDelete('CASCADE')
   })
 }
 exports.down = function (knex, Promise) {
