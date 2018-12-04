@@ -2,13 +2,9 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('shifts', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
     table.increments()
-    table.string('colname1', 255).notNullable().defaultTo('')
-    table.string('colname2', 255).notNullable().defaultTo('')
-    table.string('colname3', 255).notNullable().defaultTo('')
-    table.timestamps(true, true)
-    // OR
-    // table.dateTime('created_at').notNullable().defaultTo(knex.raw('now()'))
-    // table.dateTime('updated_at').notNullable().defaultTo(knex.raw('now()'))
+    table.string('location', 32).references('jobsites.id').onDelete('CASCADE')
+    table.dateTime('start_time').notNullable().defaultTo(knex.raw('now()'))
+    table.dateTime('end_time').notNullable().defaultTo(knex.raw('now()'))
   })
 }
 exports.down = function (knex, Promise) {

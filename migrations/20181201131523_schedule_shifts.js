@@ -2,13 +2,8 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('schedule_shifts', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
     table.increments()
-    table.string('colname1', 255).notNullable().defaultTo('')
-    table.string('colname2', 255).notNullable().defaultTo('')
-    table.string('colname3', 255).notNullable().defaultTo('')
-    table.timestamps(true, true)
-    // OR
-    // table.dateTime('created_at').notNullable().defaultTo(knex.raw('now()'))
-    // table.dateTime('updated_at').notNullable().defaultTo(knex.raw('now()'))
+    table.string('schedule', 32).references('schedules.id').onDelete('CASCADE')
+    table.string('shifts', 32).references('shifts.id').onDelete('CASCADE')
   })
 }
 exports.down = function (knex, Promise) {
