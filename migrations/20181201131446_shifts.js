@@ -1,8 +1,8 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('shifts', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
-    table.increments()
-    table.string('location', 32).references('jobsites.id').onDelete('CASCADE')
+    table.increments('id')
+    table.integer('location').references('jobsites.id').onDelete('CASCADE')
     table.dateTime('start_time').notNullable().defaultTo(knex.raw('now()'))
     table.dateTime('end_time').notNullable().defaultTo(knex.raw('now()'))
   })
