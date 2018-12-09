@@ -1,7 +1,7 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('reports', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
-    table.increments()
+    table.increments('id')
     table.integer('user').references('users.id').onDelete('CASCADE')
     table.integer('location').references('jobsites.id').onDelete('CASCADE')
     table.string('date', 64).notNullable().defaultTo('')

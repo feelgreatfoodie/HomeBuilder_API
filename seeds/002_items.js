@@ -1,13 +1,33 @@
 
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
+  return knex('items').del()
+    .then(() => {
+      return Promise.all([
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
-      ]);
-    });
-};
+        knex('items').insert([
+          { id: 1,
+            eng_name: 'round shovel',
+            esp_name: 'pala redonda',
+            category: 'tool',
+            sub_category: 'excavation',
+            sold_by: 'item'
+          },
+          { id: 2,
+            eng_name: 'jumping jack',
+            esp_name: 'compactadora',
+            category: 'tool',
+            sub_category: 'backfill',
+            sold_by: 'item'
+          },
+          { id: 3,
+            eng_name: 'broom',
+            esp_name: 'escoba',
+            category: 'tool',
+            sub_category: 'excavation',
+            sold_by: 'item'
+          }
+        ])
+      ])
+    })
+}

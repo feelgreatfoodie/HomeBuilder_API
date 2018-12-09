@@ -1,7 +1,7 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('orders', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
-    table.increments()
+    table.increments('id')
     table.integer('ordered_by').references('users.id').onDelete('CASCADE')
     table.integer('reviewed_by').references('users.id').onDelete('CASCADE')
     table.boolean('approved').defaultTo(false)
