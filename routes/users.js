@@ -1,9 +1,21 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express')
+const {
+  // checkForExisitingEmail,
+  checkForUser,
+  postUser,
+  getUsers,
+  updateUser,
+  deleteUser
+} = require('../services/userService')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
-module.exports = router;
+const router = express.Router()
+
+router.get('/', getUsers)
+router.get('/:id', checkForUser, getUsers)
+router.post('/', postUser)
+router.patch('/:id', updateUser)
+router.delete('/:id', deleteUser)
+
+
+module.exports = router
