@@ -13,8 +13,10 @@ const getOrders = (req, res, next) => {
 
   if (id) {
     knex('orders')
-      .where('id', id)
-      .select('id', 'ordered_by', 'reviewed_by', 'approved', 'created_at', 'updated_at', 'reviewed_at')
+      .where('orders.id', id)
+      // .innerJoin('users as o_b', 'ordered_by', 'o_b.id')
+      // .innerJoin('users as r_b', 'reviewed_by', 'r_b.id')
+      // .select('orders.*', 'o_b.first_name as ordered_by_first_name', 'o_b.last_name as ordered_by_last_name', 'r_b.first_name as reviewed_by_first_name', 'r_b.last_name as reviewed_by_last_name')
       .first()
       .then(order => {
         res.status(200).send(order)
@@ -32,6 +34,17 @@ const getOrders = (req, res, next) => {
         next(err)
       })
   }
+}
+
+const getOrderDetail = (req, res, next) => {
+  const { id } = req.params
+
+  knex('orders_items')
+    .where('order_id', id)
+    .innerJoin('items', 'item_id', 'items.id')
+    .select('item_id', 'eng_name', 'esp_name', 'category', 'sub_category', 'image_url', 'sold_by')
+    .then(details => res.status(200).send(details))
+    .catch(err => next(err))
 }
 
 const postOrder = (req, res, next) => {
@@ -82,6 +95,7 @@ module.exports = {
   checkForOrder,
   postOrder,
   getOrders,
+  getOrderDetail,
   updateOrder,
   deleteOrder
 }
