@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
     // TABLE COLUMN DEFINITIONS HERE
     table.increments('id')
     table.string('body', 800).notNullable().defaultTo('')
-    table.integer('user').references('users.id').onDelete('CASCADE')
+    table.integer('created_by').references('users.id').onDelete('CASCADE')
     table.dateTime('created_at').notNullable().defaultTo(knex.raw('now()'))
     table.dateTime('updated_at')
   })

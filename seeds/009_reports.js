@@ -8,7 +8,7 @@ exports.seed = function (knex, Promise) {
           {
             id: 100901,
             created_by: 100102,
-            location: 100501,
+            location_id: 100501,
             date: 'December 1, 2018',
             challenges: 'cement is heavy',
             done_today: 'poured foundation',
@@ -17,7 +17,7 @@ exports.seed = function (knex, Promise) {
           {
             id: 100902,
             created_by: 100102,
-            location: 100502,
+            location_id: 100502,
             date: 'December 1, 2018',
             challenges: 'We only have whisk brooms to clean up with',
             done_today: 'swept tiny piles of debris',
@@ -26,7 +26,7 @@ exports.seed = function (knex, Promise) {
           {
             id: 100903,
             created_by: 100103,
-            location: 100501,
+            location_id: 100501,
             date: 'December 2, 2018',
             challenges: 'The frame of the building came crashing down like a house of cards',
             done_today: 'Played pick-up sticks',

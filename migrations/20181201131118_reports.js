@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
     // TABLE COLUMN DEFINITIONS HERE
     table.increments('id')
     table.integer('created_by').references('users.id').onDelete('CASCADE')
-    table.integer('location').references('jobsites.id').onDelete('CASCADE')
+    table.integer('location_id').references('jobsites.id').onDelete('CASCADE')
     table.string('date', 64).notNullable().defaultTo('')
     table.string('challenges', 255).notNullable().defaultTo('')
     table.string('done_today', 255).notNullable().defaultTo('')

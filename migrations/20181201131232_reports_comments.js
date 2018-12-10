@@ -1,10 +1,10 @@
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('messages_comments', (table) => {
+  return knex.schema.createTable('reports_comments', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
-    table.integer('message_id').references('messages.id').onDelete('CASCADE')
+    table.integer('report_id').references('reports.id').onDelete('CASCADE')
     table.integer('comment_id').references('comments.id').onDelete('CASCADE')
   })
 }
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTableIfExists('messages_comments')
+  return knex.schema.dropTableIfExists('reports_comments')
 }
