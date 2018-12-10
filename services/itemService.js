@@ -35,24 +35,17 @@ const getItems = (req, res, next) => {
 }
 
 const postItem = (req, res, next) => {
-  const {
-    eng_name,
-    esp_name,
-    category,
-    sub_category,
-    image_url,
-    sold_by
-  } = req.body
+  const { eng_name, esp_name, category, sub_category, image_url, sold_by } = req.body
 
   const newItem = { eng_name, esp_name, category, sub_category, image_url, sold_by }
 
-    knex('items')
-      .insert(newItem)
-      .returning(['id', 'eng_name', 'esp_name', 'category', 'sub_category', 'image_url', 'sold_by'])
-      .then(item => res.status(200).send(item))
-      .catch(err => {
-        next(err)
-      })
+  knex('items')
+    .insert(newItem)
+    .returning(['id', 'eng_name', 'esp_name', 'category', 'sub_category', 'image_url', 'sold_by'])
+    .then(item => res.status(200).send(item))
+    .catch(err => {
+      next(err)
+    })
 }
 
 const updateItem = (req, res, next) => {
