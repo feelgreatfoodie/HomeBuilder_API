@@ -1,22 +1,17 @@
 const express = require('express')
-const knex = require('../knex')
+const {
+  checkForItem,
+  postItem,
+  getItems,
+  updateItem,
+  deleteItem } = require('../services/itemService')
 
 const router = express.Router()
 
-router.get('/', (req, res, next) => {
-  res.send('ALL RECORDS')
-})
-router.get('/:id', (req, res, next) => {
-  res.send('ONE RECORD')
-})
-router.post('/', (req, res, next) => {
-  res.send('CREATED RECORD')
-})
-router.put('/:id', (req, res, next) => {
-  res.send('UPDATED RECORD')
-})
-router.delete('/:id', (req, res, next) => {
-  res.send('DELETED RECORD')
-})
+router.get('/', getItems)
+router.get('/:id', checkForItem, getItems)
+router.post('/', postItem)
+router.patch('/:id', updateItem)
+router.delete('/:id', deleteItem)
 
 module.exports = router

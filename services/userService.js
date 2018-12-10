@@ -87,7 +87,7 @@ const updateUser = (req, res, next) => {
   knex('users')
     .where('id', id)
     .update({ first_name, last_name, email_address, phone_number })
-    .returning(['first_name', 'last_name', 'phone_number', 'email_address'])
+    .returning(['id', 'first_name', 'last_name', 'phone_number', 'email_address'])
     .then(user => {
       res.status(200).send(user[0])
     })

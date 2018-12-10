@@ -8,7 +8,6 @@ const {
   deleteUser
 } = require('../services/userService')
 
-
 const router = express.Router()
 
 router.get('/', getUsers)
