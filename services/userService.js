@@ -1,30 +1,20 @@
 const knex = require('../knex')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 // const uuid = require('uuid/v4')
 
 const checkForExisitingEmail = (req, res, next) => {
   const { email_address } = req.body
   knex('users')
     .where('email_address', email_address)
-    .then(user => {
-      if (user.length === 1) {
-        res.status(400).send('Email address already registered')
-      }
-      else next()
-    })
+    .then(user => user.length === 1 ? res.status(400).send('Email already registered') : next())
 }
 
 const checkForUser = (req, res, next) => {
   const { id } = req.params
   knex('users')
     .where('id', id)
-    .then(user => {
-      if (user.length < 1) {
-        res.status(400).send(`No user found with id ${id}`)
-      }
-      else next()
-    })
+    .then(user => user.length < 1 ? res.status(400).send(`No user found with id ${id}`) : next())
 }
 
 const getUsers = (req, res, next) => {
