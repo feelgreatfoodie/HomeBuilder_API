@@ -25,7 +25,8 @@ exports.seed = function (knex, Promise) {
           city: 'Venice',
           state: 'CA',
           zip: '90291',
-        },
+        }
       ])
+      .then(() => knex.raw(`SELECT setval('jobsites_id_seq', (SELECT MAX(id) FROM jobsites));`))
     ]))
 }

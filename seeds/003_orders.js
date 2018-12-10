@@ -1,5 +1,5 @@
 
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex('orders').del()
     .then(() => Promise.all([
@@ -19,8 +19,9 @@ exports.seed = function(knex, Promise) {
           id: 100303,
           ordered_by: '100102',
           approved: 'false',
-        },
+        }
       ])
+      .then(() => knex.raw(`SELECT setval('orders_id_seq', (SELECT MAX(id) FROM orders));`))
     ])
   )
 }

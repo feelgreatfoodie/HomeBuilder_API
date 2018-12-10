@@ -19,7 +19,8 @@ exports.seed = function (knex, Promise) {
           title: 'The Subtle Art of Paper Jamming',
           body: 'My name is Michael Bolton and I hate copy machines.',
           user: 100101
-        },
+        }
       ])
+      .then(() => knex.raw(`SELECT setval('messages_id_seq', (SELECT MAX(id) FROM messages));`))
     ]))
 }

@@ -2,7 +2,7 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('reports', (table) => {
     // TABLE COLUMN DEFINITIONS HERE
     table.increments('id')
-    table.integer('user').references('users.id').onDelete('CASCADE')
+    table.integer('created_by').references('users.id').onDelete('CASCADE')
     table.integer('location').references('jobsites.id').onDelete('CASCADE')
     table.string('date', 64).notNullable().defaultTo('')
     table.string('challenges', 255).notNullable().defaultTo('')

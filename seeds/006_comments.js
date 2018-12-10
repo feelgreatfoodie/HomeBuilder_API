@@ -16,7 +16,8 @@ exports.seed = function (knex, Promise) {
         { id: 100603,
           body: 'This is a very SERIOUS comment.',
           user: 100103
-        },
+        }
       ])
+      .then(() => knex.raw(`SELECT setval('comments_id_seq', (SELECT MAX(id) FROM comments));`))
     ]))
 }
