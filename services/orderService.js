@@ -1,6 +1,7 @@
 const knex = require('../knex')
 // const uuid = require('uuid/v4')
 
+// Verifies if there is an order with given ID
 const checkForOrder = (req, res, next) => {
   const { id } = req.params
   knex('orders')
@@ -8,15 +9,16 @@ const checkForOrder = (req, res, next) => {
     .then(order => order.length < 1 ? res.status(400).send(`No order found with id ${id}`) : next())
 }
 
+// Retrieves all orders or a specific order along with user information for who created it
 const getOrders = (req, res, next) => {
   const { id } = req.params
 
   if (id) {
     knex('orders')
       .where('orders.id', id)
-      // .innerJoin('users as o_b', 'ordered_by', 'o_b.id')
+      .innerJoin('users', 'ordered_by', 'users.id')
       // .innerJoin('users as r_b', 'reviewed_by', 'r_b.id')
-      // .select('orders.*', 'o_b.first_name as ordered_by_first_name', 'o_b.last_name as ordered_by_last_name', 'r_b.first_name as reviewed_by_first_name', 'r_b.last_name as reviewed_by_last_name')
+      .select('orders.*', 'first_name as ordered_by_first_name', 'last_name as ordered_by_last_name', 'phone_number', 'email_address')
       .first()
       .then(order => {
         res.status(200).send(order)
@@ -36,6 +38,7 @@ const getOrders = (req, res, next) => {
   }
 }
 
+// Retrieves all items for given order with full info on items
 const getOrderDetail = (req, res, next) => {
   const { id } = req.params
 
