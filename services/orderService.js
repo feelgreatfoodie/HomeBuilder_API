@@ -16,9 +16,12 @@ const getOrders = (req, res, next) => {
   if (id) {
     knex('orders')
       .where('orders.id', id)
-      .innerJoin('users', 'ordered_by', 'users.id')
-      // .innerJoin('users as r_b', 'reviewed_by', 'r_b.id')
-      .select('orders.*', 'first_name as ordered_by_first_name', 'last_name as ordered_by_last_name', 'phone_number', 'email_address')
+      .innerJoin('users as ob', 'ordered_by', 'ob.id')
+      .leftJoin('users as rb', 'reviewed_by', 'rb.id')
+      // .innerJoin('orders_comments', 'order_id', 'orders.id')
+      // .leftOuterJoin('comments', 'orders.id', 'order_id')
+      // .leftJoin('users as cu', 'comments.created_by', 'cu.id')
+      .select('orders.id', 'ordered_by', 'ob.first_name as ordered_by_first_name', 'ob.last_name as ordered_by_last_name', 'ob.phone_number', 'ob.email_address', 'reviewed_by', 'rb.first_name as reviewed_by_first_name', 'rb.last_name as reviewed_by_last_name', 'approved', 'reviewed_at')
       .first()
       .then(order => {
         res.status(200).send(order)
@@ -50,6 +53,7 @@ const getOrderDetail = (req, res, next) => {
     .catch(err => next(err))
 }
 
+// Creates a new Order in database
 const postOrder = (req, res, next) => {
   const { ordered_by, reviewed_by, approved, created_at, updated_at, reviewed_at } = req.body
 
@@ -64,6 +68,7 @@ const postOrder = (req, res, next) => {
     })
 }
 
+// Updates current Order in database
 const updateOrder = (req, res, next) => {
   const { id } = req.params
   const { ordered_by, reviewed_by, approved, created_at, updated_at, reviewed_at } = req.body
@@ -80,6 +85,7 @@ const updateOrder = (req, res, next) => {
     })
 }
 
+// Deletes current Order in database
 const deleteOrder = (req, res, next) => {
   const { id } = req.params
   knex('orders')

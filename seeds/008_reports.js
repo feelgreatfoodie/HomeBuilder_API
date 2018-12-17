@@ -6,7 +6,7 @@ exports.seed = function (knex, Promise) {
         // Inserts seed entries
         knex('reports').insert([
           {
-            id: 100901,
+            id: 100801,
             created_by: 100102,
             location_id: 100501,
             date: 'December 1, 2018',
@@ -15,7 +15,7 @@ exports.seed = function (knex, Promise) {
             do_next: 'framing',
           },
           {
-            id: 100902,
+            id: 100802,
             created_by: 100102,
             location_id: 100502,
             date: 'December 1, 2018',
@@ -24,7 +24,7 @@ exports.seed = function (knex, Promise) {
             do_next: 'continue sweeping for 14 days... or until the order of push brooms arrive',
           },
           {
-            id: 100903,
+            id: 100803,
             created_by: 100103,
             location_id: 100501,
             date: 'December 2, 2018',

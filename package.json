@@ -2,9 +2,6 @@
   "name": "sollars",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
   "dependencies": {
     "bcrypt": "^3.0.2",
     "cookie-parser": "~1.4.3",
@@ -20,5 +17,14 @@
   },
   "devDependencies": {
     "eslint-config-rallycoding": "^3.2.0"
+  },
+  "engines": {
+    "node": "v10.12.0"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
+    "nodemon": "nodemon ./bin/www"
   }
 }

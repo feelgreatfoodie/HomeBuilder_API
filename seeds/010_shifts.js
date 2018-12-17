@@ -5,13 +5,13 @@ exports.seed = function (knex, Promise) {
     .then(() => Promise.all([
       // Inserts seed entries
       knex('shifts').insert([
-        { id: 101401,
+        { id: 101001,
           location_id: 100501
         },
-        { id: 101402,
+        { id: 101002,
           location_id: 100502
         },
-        { id: 101403,
+        { id: 101003,
           location_id: 100503
         }
       ])
